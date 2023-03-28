@@ -1,0 +1,82 @@
+\subsection{Research Objectives and Questions}
+The objective of this project was to explore the role of image processing
+procedures in material investigation. This was done by investigating the
+connection between x-radiography intensity and composition of a binary
+alloy, developing procedures for tracking solid-liquid interfaces during
+solidification experiments, extending watershed segmentation procedure to
+improve results for nonuniform particles, and developing a software
+package for informing physics simulation with initial conditions from
+x-ray computed tomography data. The following questions were developed to
+address these objectives:
+
+\bigskip
+\noindent 1. \textit{
+    How can in-situ x-radiography be used in conjunction with
+    other methods of analysis to infer composition of an Al-Ag alloy during
+    solidification?
+}
+
+Studies have been performed using calibration experiments to relate x-ray
+image intensity to composition during solidification of binary alloys. To
+study whether these calibration experiments are necessary, directional
+solidification of an Al-Ag alloy was monitored with in-situ, microfocus
+radiography. The radiograph intensity was compared to energy dispersive
+spectroscopy and the data were analyzed for similar trends.
+
+\bigskip
+\noindent 2. \textit{
+    How successful is an image processing procedure at automating the
+    identification, tracking, and velocity calculation of solid-liquid interfaces
+    during in-situ solidification experiments?
+}
+
+Identifying, tracking, and analyzing the solid-liquid
+interface in solidification experiments is necessary to extract important
+information like solidification velocity and melt pool shape, but the task
+of manually tracking interfaces is time consuming and prone to human error
+and biases. Using traditional image processing methods, routines were
+developed to identify, track, and analyze the solid-liquid interfaces in
+additive manufacturing simulator experiments as well as rapid
+solidification experiments captured with a dynamic transmission electron
+microscope. The resulting melt pool locations were used to calculate
+solidification velocities and compared to results from manually tracking
+the interfaces.
+
+\bigskip
+\noindent 3. \textit{
+    How can the segmentation of multi-sized, irregularly-shaped, and
+    tightly-clustered particles be improved?
+}
+
+Watershed segmentation is a
+common method for segmenting objects in an image from other objects and
+from the background. One method of performing these types of algorithms is
+by ``seeding'' the algorithm with ``marker'' points. Each marker will become a
+segmented region, so controlling the marker points is one way to control
+the results. Often markers are narrowed down using the distance between
+adjacent points, but this distance can be extremely variable for
+multi-sized and irregularly-shaped. Delaunay triangulation, which is an
+algorithm which generates a connected grid of points, is tested to
+determine if it can be used along with edge strength to filter markers
+across varying distances.
+
+\bigskip
+\noindent 4. \textit{
+    How can a workflow be designed to extract 3D geometries from x-ray
+    computed tomography data such that the geometry of a physical sample can be
+    reproduced digitally for use as initial conditions in an image-based physics
+    simulation?
+}
+
+X-ray computed tomography
+(XCT) is a useful tool for nondestructive testing of materials. A mock
+high explosives system of F50 silica sand coated in Kel-F, a
+polymeric binder, was subject to XCT to generate a set of 3D images.
+\textit{Segmentflow}, a Python-based, segmentation workflow software
+package was
+developed to enable the segmentation of individual sand grains within the
+XCT data. Based on parameters specified in an input file,
+\textit{Segmentflow} can
+output the segmented grains in a variety of formats to be used in physics
+simulations.
+

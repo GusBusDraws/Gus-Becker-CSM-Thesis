@@ -1,0 +1,21 @@
+% \section{Abstract}
+Watershed segmentation algorithms are useful tools
+to separate features in an image from one another, enabling
+more targeted analyses. However, these algorithms
+often do not achieve expected results for multi-sized or
+irregularly-shaped particles, or particles clustered tightly together without
+strongly defined edges along contact surfaces.
+This chapter presents an image processing procedure
+implemented in Python (with
+libraries including \textit{scikit-image}, \textit{imageio}, \textit{NumPy},
+and \textit{SciPy}) to improve the results of a
+watershed segmentation algorithm. The proposed procedure involves application
+of a preprocessing routine and custom algorithm which utilizes Delaunay
+triangulation to merge segmented regions based on
+edge strength between the regions.
+The resulting merged-region segmentation results are calculated to more
+closely match a manual segmentation than a typical watershed segmentation
+on its own. The procedure is tested on a 2D radiograph sliced from a 3D
+x-ray computed tomography (XCT) dataset depicting irregularly-shaped and
+multi-sized sand grains that are tightly clustered with a polymer binder.
+

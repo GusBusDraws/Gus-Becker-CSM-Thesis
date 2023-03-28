@@ -1,0 +1,208 @@
+% ><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><
+%       Mines LaTeX Thesis Template. 
+% ><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><
+% This template was written for pdfLaTex Compilers
+\documentclass[letterpaper,12pt]{article} %% <-- INPUT: Font size below, change the number to 10, 11 or 12pt
+
+% =====================================
+%       Packages & Setup
+% =====================================
+\usepackage{csm-thesis}         % Proper Thesis Formatting. This requires the 'csm-style-files' directory
+
+\usepackage{array}              % For inserting large multi-page tables
+\usepackage{longtable}
+
+\usepackage[numbers]{natbib}    % For proper citations
+\usepackage{hyperref}           % For referencing though out the document. Can change, look at user manual how to change
+\usepackage{pdflscape}          % For inserting landscape-mode objects 
+\usepackage{pdfpages}           % For including existing PDFs
+\usepackage{amsmath}            % For matrices
+\usepackage{listings}           % For inserting programming code
+\usepackage{rotating}           % For inserting sideways tables and figures
+\usepackage{lipsum}             % For dummy text. You can remove this once you have remove all of the example text. 
+% For using helvetica instead of Computer Modern
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% ><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><
+%       GENERAL USER INFO: Title, Authors, Advisors...
+% ><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><
+% >>>>>>>>>>>>>>>> TITLE <<<<<<<<<<<<<<<<
+
+\title{
+    Procedural Analyses of Image-Based and\\
+    Multiscale Material Investigations
+}
+
+% >>>>>>>>> PERSONAL INFORMATION <<<<<<<<<
+\degreetitle{Doctor of Philosophy}                   % Degree Title like Master of Science or Doctor of Philosophy
+\discipline{Materials Science}                       % Area of research, eg. Applied Physics
+\department{Metallurgical and Materials Engineering} % Your department, eg. Physics
+
+\author{C. Gus Becker}                           % your NAME, don't forget your middle names.
+\advisor{Dr. Amy Clarke}                         % your Advisor, put Dr. in front if they have a PhD them selves!
+% \coadvisor{Dr. Secondary B. Advisor}           % if you have a co-advisor, otherwise Comment out/remove the line
+\dpthead{Dr. Ivar Reimanis}{Professor and Department Head}    % department head name & title. eg. \dpthead{Dr. Uwe Greife}{Professor and Department Head}
+
+\begin{document}
+% ><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><
+%       FRONT MATTER
+% ><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><
+
+\frontmatter                       % Leave this line here, it sets the formatting 
+                                   % requirements for the front matter of the document
+\maketitle\newpage                 % >>>>>>>>> Title Page (required) <<<<<<<<<
+\makecopyright{\the\year}\newpage  % >>>>>>>>> Copyright Page (optional) <<<<<<<<< 
+\makesubmittal\newpage             % >>>>>>>>> Signature Page (required) <<<<<<<<<
+
+% >>>>>>>>> Abstract (required) <<<<<<<<<
+\begin{abstract}
+\input{supporting-files/abstract}
+\end{abstract} \newpage
+% >>>>>>>>>>>>>>>>>>> <<<<<<<<<<<<<<<<<<<
+
+\tableofcontents\newpage        % >>>>>>>>> Table of Contents (required) <<<<<<<<<<<
+\listoffigures\newpage          % >>>>>>>>> List of Figures (if applicable) <<<<<<<<
+\listoftables\newpage           % >>>>>>>>> List of Tables (if applicable) <<<<<<<<<
+
+% >>>>>>>> Acknowledgments (optional) <<<<<<<<
+\begin{acknowledgments}
+I would like to acknowledge and thank the following people and groups:
+Dr. Amy Clarke and Dr. Kester
+Clarke for guiding the research presented here;
+the nondestructive testing group E-6 at Los Alamos National Laboratory,
+the National Nuclear Security Administration through the Predictive
+Sciences Academic Alliance Program, the Office of Naval Research through
+the Multidisciplinary University Research Initiatives program,
+and the Center for Advanced Non Ferrous Structural Alloys (CANFSA)
+for funding different portions of this work;
+Dr. Jonah Klemm-Toole and Dr. Daniel Adams for their valuable input
+as part of my thesis committee;
+and my family and friends for supporting me along the way,
+including the many other students at Mines and collaborating universities
+whose collaborations, feedback, and advice made this work possible.
+%Write an acknowledgement that is appropriate to you and your work. You may decide who you want to include.
+\end{acknowledgments} \newpage
+
+% >>>>>>>>>> Dedication (optional) <<<<<<<<<<
+\begin{dedication}
+For my partner Kaila.\\
+I will always be grateful for your love and support during this time!
+\addsymbol{hello}{$\cdots$}     %<-- you can add symbols and abbreviations anywhere in the text but it is good to keep them organized in one spot!
+\end{dedication}\newpage
+
+
+% ><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><
+%                   BODY: All Chapters and Sections
+% ><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><
+\bodymatter     % Leave this line here, it sets the formatting requirements for the front matter of the document
+
+% You can directly add you chapter text into this document. But to keep organized you
+% are advised to separate you chapters into their own files, as this example shows
+% -------------------------------------------------------------------------
+%   Chapter 1: Introduction
+% -------------------------------------------------------------------------
+\chapter{INTRODUCTION} \label{ch/intro}
+\input{chapters/01/1-background.tex}
+\input{chapters/01/2-questions.tex}
+\input{chapters/01/3-overview.tex}
+
+% -------------------------------------------------------------------------
+%   Chapter 2
+% -------------------------------------------------------------------------
+\chapter{LITERATURE REVIEW} \label{ch/lit-review}
+\input{chapters/02/1-lit-review.tex}
+
+% -------------------------------------------------------------------------
+%   Chapter 3
+% -------------------------------------------------------------------------
+\newpage
+\chapter{
+    INTEGRATING IN SITU X-RAY IMAGING, ENERGY DISPERSIVE SPECTROSCOPY,
+    AND CALCULATED PHASE DIAGRAM ANALYSIS OF SOLUTE SEGREGATION
+    DURING SOLIDIFICATION OF AN AL-AG ALLOY} \label{ch/xray}
+\input{chapters/03/0-xray-preface.tex}
+\input{chapters/03/1-xray-abstract.tex}
+\input{chapters/03/2-xray-intro.tex}
+\input{chapters/03/3-xray-methods.tex}
+\input{chapters/03/4-xray-results.tex}
+\input{chapters/03/5-xray-conclusion.tex}
+
+% -------------------------------------------------------------------------
+%   Chapter 4
+% -------------------------------------------------------------------------
+\newpage
+\chapter{
+    PROCEDURALLY DETECTING SOLID-LIQUID INTERFACES DURING SIMULATED ADDITIVE
+    MANUFACTURING AND RAPID SOLIDIFICATION} \label{ch/melt}
+\input{chapters/04/1-melt-abstract.tex}
+\input{chapters/04/2-melt-intro.tex}
+\input{chapters/04/3-melt-methods-aps.tex}
+\input{chapters/04/4-melt-methods-dtem.tex}
+\input{chapters/04/5-melt-results.tex}
+\input{chapters/04/6-melt-discussion.tex}
+\input{chapters/04/7-melt-conclusions.tex}
+
+% -------------------------------------------------------------------------
+%   Chapter 5
+% -------------------------------------------------------------------------
+\newpage
+\chapter{
+    IMPLEMENTING EDGE STRENGTH CORRECTIONS TO IMPROVE SEGMENTATION OF
+    IRREGULARLY-SHAPED, MULTI-SIZED, AND TIGHTLY-CLUSTERED PARTICLES
+    \label{ch/seg}
+}
+\input{chapters/05/1-seg-abstract.tex}
+\input{chapters/05/2-seg-intro.tex}
+\input{chapters/05/3-seg-methods.tex}
+\input{chapters/05/4-seg-results.tex}
+\input{chapters/05/5-seg-discussion.tex}
+\input{chapters/05/6-seg-conclusions.tex}
+
+% -------------------------------------------------------------------------
+%   Chapter 6
+% -------------------------------------------------------------------------
+\newpage
+\chapter{
+    SEGMENTFLOW: A SEGMENTATION WORKFLOW PACKAGE FOR CREATING
+    SIMULATION-READY GEOMETRIES FROM 3D IMAGE DATA} \label{ch/sf}
+\input{chapters/06/1-sf-abstract.tex}
+\input{chapters/06/2-sf-intro.tex}
+\input{chapters/06/3-sf-methods.tex}
+\input{chapters/06/4-sf-results.tex}
+\input{chapters/06/5-sf-discussion.tex}
+\input{chapters/06/6-sf-conclusions.tex}
+
+% -------------------------------------------------------------------------
+%   Chapter 7
+% -------------------------------------------------------------------------
+\chapter{SUMMARY AND CONCLUSIONS} \label{ch/summary}
+\input{chapters/07/1-summary.tex}
+
+% -------------------------------------------------------------------------
+%   Chapter 8
+% -------------------------------------------------------------------------
+\chapter{RECOMMENDATIONS FOR FUTURE WORK} \label{ch/future}
+\input{chapters/08/1-future-work.tex}
+
+
+% ><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><
+%                   BACK MATTER: Reference Cited
+% ><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><
+\backmatter     % Leave this line here, it sets the formatting requirements for the back matter of the document
+
+% >>>>>>>>> References Cited (required) <<<<<<<<<<
+\urlstyle{rm}               % <-- Sets the URL font to be the same as the other text
+\bibliography{supporting-files/thesis}
+
+% Make sure the citations in you .bib file are correct. Especially double check that the resources type is correct. This will dictate how the items in the bibliography are formatted.
+
+% Highly recommend using a citation/reference management tool to create your .bib file. This make your references machine readable in the click of a button. Attend a Libray workshop, visit the Library's website, or speak to a librarian about getting started with a citation management tool. This will make your life much easier. READ: MUCH EASIER! https://libguides.mines.edu/citing/software
+
+% Look at http://bib-it.sourceforge.net/help/fieldsAndEntryTypes.php#phdthesis to find some information on the types of fields that exist. Also recommend using a reference manger. 
+
+
+% >>>>>>>>> Appendices (if applicable) <<<<<<<<<<
+\input{supporting-files/appendix.tex}
+
+\end{document}

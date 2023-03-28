@@ -1,0 +1,156 @@
+\subsection{Methods}
+% -------------------------------------------------------------------------
+A dynamic solidification set-up previously used for in situ synchrotron
+x-radiography was used to capture the dynamic solidification of an
+Al-9.68Ag at\% sample measuring 10 x 17 x 0.25 mm. This thickness was
+chosen to constrain solidification structures to a single plane so that
+multiple features were not layered on top of each other when projected
+onto the 2D plane of the image. The sample was inserted into a boron
+nitride crucible, transparent to x-rays, which was placed in a vertically
+oriented steel rod assembly aligned with a window in the path of the
+x-rays to aid in transmission. Heating elements at the top and bottom of
+the rod assembly controlled a temperature gradient across the rod and
+sample, and allowed for controlled directional solidification. Details
+about the setup (as it was used previously for synchrotron x-radiography
+solidification experiments) can be found in the supplemental material of
+previous work \cite{Tourret2017,Clarke2015}.
+
+An X-Com 225 microfocus x-ray source was operated at a voltage
+of 206 kV, a current of 150 µA, and a focal spot size of 30 µm to generate
+the x-rays for radiography. A scintillator placed downstream from the
+sample and the source converted the x-rays transmitted through the sample
+to visible light,
+so the photons could be captured by a Varian CCD
+with a 127 x 127 µm pixel pitch and an integration time of 200 ms,
+correlating with a capture framerate of 5 Hz. A total of 6022 images were
+captured in an elapsed time of 1205 s. The geometric magnification from
+the placement of the sample between the source and detector resulted in a
+spatial resolution of 11 µm per pixel in the radiographs and a 21 x 16 mm
+FOV (\textgreater350 mm\textsuperscript{2}). Since the experimental set-up for
+the solidification experiment was originally
+designed for use at a synchrotron facility, the
+collected radiographs capture a much larger area than was designed to be
+captured by synchrotron radiography. Of the entire FOV, only an area
+measuring 8.3 x 4.4 mm (approximately 36 mm\textsuperscript{2}) is analyzed,
+which is still significantly
+larger than a typical maximum interrogated area in synchrotron x-ray
+experiments of approximately 1.5 x 2 mm
+(approximately 3 mm\textsuperscript{2}).
+
+% -------------------------------------------------------------------------
+\subsubsection{Image Post-Processing and Analysis}
+% -------------------------------------------------------------------------
+To prepare the images for analysis, an image processing routine was
+performed across the entire set of images. A series of Python functions
+were developed to process the images loaded as numerical arrays. A series
+of open source packages were used to aid in this process: \textit{Jupyter}
+notebooks for performing an iterative analysis while maintaining a
+reproducible workflow \cite{jupyter},
+\textit{NumPy} for representing the images as
+numerical arrays and performing fast calculations \cite{numpy},
+\textit{imageio} for loading the images into the arrays \cite{imageio},
+\textit{scikit-image} for performing image-processing algorithms \cite{skimage},
+and \textit{napari} for visualizing and annotating the data with an
+interactive, multi-dimensional image viewer \cite{napari}.
+
+The first step in the processing routine is to crop the experimental image
+set to the smaller region of interest. Since the steel rod containing the
+crucible and solidifying sample has a window for the sample, the rest of
+the rod does not transmit as many x-rays outside the region containing the
+sample. Cropping out these regions and the lighter regions beyond the rod
+enable the greatest contrast range to be assessed across the solidifying
+structures of the sample. Once the images are cropped to within the
+window, a dark image (captured without the sample or x-rays present) and a
+beam image (captured without the sample but with x-rays present) are used
+to spatially normalize the images. The dark image is subtracted from the
+image set and divided by the difference of the beam image and the dark
+image, which reduces the intensity of artifacts in the image set
+introduced by the beam and the detector. The spatially normalized image
+set is temporally normalized by multiplying by the mean of each image and
+dividing by the total mean of the entire image set. This reduces intensity
+variations across the set of images. At this point, the pixels of each
+image corresponding to the 1st and 99th percentile are clipped to further
+increase contrast. To smooth out small variations in the images, while
+maintaining sharp edges between features within the images, a median
+filter is applied for each image.
+
+The next phase of the processing routine separates a 50-image subset of
+the image set, in which the sample remains fully liquid, to normalize the
+solidifying portion of the sample to the liquid state. This normalization
+reduces artifacts in the image introduced by the sample assembly,
+including any nonuniformities in the crucible. The 50 images in which the
+sample is fully liquid (having undergone the previously described
+processing routine) are averaged together to form a single average liquid
+image, at which point each image in the solidifying portion of the image
+set is divided by this average liquid image. The final steps of the
+image-processing routine rotate the normalized images and rescale the
+intensities of each image to the full range of the floating-point data
+type.
+
+% -------------------------------------------------------------------------
+\subsubsection{Post-Solidification SEM Imaging and Compositional Mapping}
+% -------------------------------------------------------------------------
+Following solidification, SEM was used to perform BSE imaging. Due to a
+faint, vertical brightness gradient in the as-captured BSE images,
+ImageJ \cite{imagej} was used to apply a bandpass filter
+to the fast Fourier transform
+of each image prior to stitching in Image Composite Editor software. This
+approach flattened the images to ensure uniform brightness and contrast
+across the entire x-radiography FOV.
+
+EDS was also used to evaluate the distribution of solute content along
+features of interest within the x-radiography FOV. To mitigate topographic
+effects, the sample was prepared by polishing through a 1 µm diamond
+suspension solution. Backscatter imaging was performed at 30 kV in a
+Tescan S8252G dual-beam focused ion beam, and EDS line scan data were
+collected with an EDAX Octane Elect Plus detector.
+Collecting \textgreater10 k
+counts per pixel significantly reduced noise in the EDS data, and led to
+semi-quantitative ZAF composition results in the APEX\texttrademark{} software.
+
+EDS and x-radiography line profiles were compared across two regions in
+the Al-Ag sample. Image data from each technique were first manually
+aligned so that the line profiles would correspond to the same locations
+on the sample. The process of aligning the data involved taking the BSE
+montage and overlaying it on the processed radiograph, representing the
+sample at a point in time at the end of solidification. The large montage
+image allowed for multiple points of reference across the sample to
+correctly match the scale, translation, and rotation of the BSE montage
+relative to the radiograph. With the montage in place, images locating the
+EDS line scan on a smaller BSE image of each region were overlaid on the
+larger radiograph-BSE alignment, using surface defects of the BSE images
+to match the scale, translation, and rotation between the images. This
+portion of the analysis was done using Python and the \textit{napari}
+image viewer, which allowed for layers corresponding to each image to be
+scaled, translated, and rotated relative to each other, while maintaining the
+ability to adjust opacity for each image layer to ensure an optimal
+alignment.
+
+A one-dimensional median filter was applied to the EDS data to reduce
+noise in the signal. The line intensity profile from the radiograph was
+measured using Python and the measure submodule from \textit{scikit-image}.
+The intensity profile was averaged across a line with a thickness of three
+pixels to reduce noise. To make comparisons between these datasets, even
+though they were collected through different modes of analysis (and
+therefore have different units corresponding to signal amplitudes), the
+datasets were standardized by subtracting the mean from each dataset and
+normalizing by the standard deviation. The mean subtraction centers each
+dataset around zero to align each dataset vertically. Dividing by the
+standard deviation normalizes the variation in each of the datasets to a
+unitless range, allowing for variation from the mean to be compared, even
+though the original scales were not the same. The variation from the mean
+for each dataset should be similar if each is varying due to similar
+phenomena, e.g., the compositional differences present from solidification
+that we expect to see.
+
+% -------------------------------------------------------------------------
+\subsubsection{CalPhaD Modeling}
+% -------------------------------------------------------------------------
+Solute microsegregation has been modeled following Scheil solidification
+(assuming that no Ag diffusion occurs in the solid state and perfect
+mixing is maintained in the liquid) \cite{Scheil1942} and lever rule
+(full equilibrium)
+solidification. These calculations were performed by the calculation of
+phase diagrams (CalPhaD) method using Thermo-Calc software with the TCAL7
+database.
+

@@ -1,0 +1,70 @@
+% Procedural Analyses of Image-Based, Multiscale Investigations of Materials
+Methods of material investigation often produce data in the form of
+images. Visual assessments can convey qualitative analyses of these
+images, but expressing these initial analyses in a quantitative manner is
+nontrivial. This work studies the role of image processing procedures in
+extracting information for material investigations.
+
+The first objective of this work was to explore the feasibility of
+in-situ, microfocus x-radiography to monitor the composition of a binary
+alloy during solidification. Features in an image are represented by
+localized intensities which must be connected to physical quantities
+before quantitative information can be interpreted in an image. In this
+study, an image processing procedure was developed to reduce noise across
+a large number of radiographs captured during directional solidification.
+The final radiograph in the series, depicting the as-solidified sample,
+was compared with composition data captured via energy dispersive
+spectroscopy (EDS) to show radiographic intensity trends matched the
+compositional trends in the EDS data.
+
+The second objective of this work was to determine the success of image
+processing procedures for identifying and tracking solid-liquid (S-L)
+interfaces during in-situ, melt pool analysis of solidification
+experiments. These measurements allowed for the calculation of
+solidification velocity. When paired with information about the thermal
+gradients in these experiments (obtainable by comparison with
+simulations), this information allows for a characterization of the
+structure and therefore properties of the as-solidified metal. The
+detection procedures were developed for synchrotron x-radiography of
+simulated additive manufacturing (AM) and dynamic transmission electron
+microscopy (DTEM) of thin film rapid solidification and compared with
+manual measurements. This work sought to determine whether these
+procedures would be able to reduce inconsistencies due to subjective
+judgment calls made during manual annotation. In the case of the AM
+simulator, the results showed large deviations due to noise, but a higher
+amount of the detected measurements were within the average manual
+distribution. For the rapid solidification, detected results matched the
+manual results closely.
+
+The third objective of this work was to improve the segmentation of
+multi-sized, irregularly-shaped, and tightly-clustered particles in a 2D
+image. There are many algorithms to automatically segment features within
+images, but these algorithms work best for features with uniform sizes and
+shapes that have well-defined boundaries. In this study, a new
+segmentation procedure is proposed which consists of three steps:
+preprocessing to over-identify particles, application of a watershed
+algorithm to intentionally over-segment these particles into regions, and
+a custom algorithm to selectively merge these over-segmented regions based
+on edge intensity between regions. The resulting merged-region results and
+the results from a typical watershed segmentation are both compared with a
+manual segmentation of the same image. The fit between the merged-region
+results and the manual segmentation is calculated to be higher than the
+fit between the typical watershed and manual segmentation.
+
+The final objective of this work was to develop a flexible workflow for
+generating 3D geometries of granular materials from microfocus x-ray
+computed tomography (XCT) data. These geometries are to be used as initial
+conditions in image-based physics simulations. A software package called
+\textit{Segmentflow} was developed to contain the workflow functions.
+\textit{Segmentflow}
+is controlled by an input file which specifies the input data to be
+segmented, the segmentation parameters, and the output format of the
+results. The features of \textit{Segmentflow} are exhibited
+by creating simulation-ready geometries from
+an XCT scan of a mock high explosives system consisting of F50 silica sand 
+and a Kel-F polymer binder.
+The geometries are verified by analyzing the segmented particles and comparing
+the results to a typical size distribution of F50 sand.
+A variety of mesh postprocessing is also performed to show how
+\textit{Segmentflow} can be used to control the complexity of a simulation.
+

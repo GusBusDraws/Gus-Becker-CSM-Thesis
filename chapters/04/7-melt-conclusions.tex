@@ -1,0 +1,91 @@
+\subsection{Conclusions}
+Methods for calculating solidification velocities are important
+for accurately predicting microstructures in AM-like processes
+and linking those microstructures to processing parameters.
+Characterization tools like synchrotron
+x-radiography and DTEM enable high spatial and temporal resolution in-situ
+monitoring of solidification, but the large amounts of data these
+techniques yield require difficult manual analysis to retrieve
+quantitative information like solidification velocities. Tracking and
+annotating image data manually introduces human bias and error that can be
+inconsistent across measurements and users. Reasons for these
+inconsistencies include subjective judgement calls, personal preferences,
+miscommunications, and user fatigue. These sources of error in
+measurements can be difficult, and in some cases nearly impossible, to
+quantify. The automated detection techniques presented in this work
+explored the possibility of a consistent method of analyzing image data
+from solidification experiments, while also reducing the effect of bias on
+the collected data. Two procedures were presented in this work for
+automating the detection of S-L interfaces and calculating solidification
+velocities, and each procedure was applied to three separate experiments.
+The first procedure determined S-L interface positions in synchrotron
+x-radiography images from simulated AM experiments. The second procedure
+automated the detection of S-L interfaces for frames in three
+separate DTEM images depicting thin film rapid solidification.
+Each procedure was similar but each took a slightly different approach to
+interface detection.
+
+The simulated AM procedure performed adequately as compared to manual
+measurements.
+The detection procedure returned drastically different mean velocities from
+the manual measurements for the 104 W and 156 W experiments, however the median
+detected and manual velocities are similar, suggesting that the differing
+means are because of outliers in the velocity, which is supported by the
+significantly higher detected deviation from the manual mean velocity
+compared with the manual deviation from the manual mean velocity.
+In the 208 W experiment, the detected mean velocity is the same as the
+manual velocity, but the median velocities differed. Similar to the 104 W
+and 156 W experiments, the detected deviation from the manual mean is much
+higher than the manual deviation. This suggests that the 208 W experiment
+has a similar problem with the outliers, but that the outlying detected
+velocities are more evenly distributed both above and below the manual
+mean velocity.
+
+The rapid solidification procedure performed well as compared to the manual
+measurements. For the first and second experiments, the mean and median values
+are both similar with low deviations from the manual mean velocity. In the
+third experiment, the detected mean velocity differs more than either of the
+previous two experiments, but the median values are still similar. The
+detected deviation from the manual mean is also higher in this experiment.
+Upon closer analysis, the detected velocity has the highest deviation from
+the manual mean velocity towards the end of the experiment. This is
+significant because the third experiment fully solidified
+before the other two experiments. The melt pool does not even show up
+in the final frame. This suggests the procedure does best when
+the melt pool is larger and more distinguishable from noise.
+
+The simulated AM procedure did not include any kind of a fit optimization step.
+The rapid solidification procedure, which did optimize the fit of the detected
+melt pool, was more successful in matching the manually measured velocities.
+If a similar optimization step could be included in the simulated AM procedure,
+there may be an increase in detection accuracy.
+In addition, the fitting of the interfaces to parameterized shapes would allow
+the solidification velocity to be calculated at multiple points along the
+interfaces. This is not currently possible since the procedure
+measures the location of the interface based on the bottom of the interface,
+thus only allowing for the vertical solidification velocity
+to be calculated.
+
+While this work doesn't claim that these data extraction and analysis methods
+remove human biases altogether (the procedures were written by a human, after
+all), a procedure deterministically run by a computer
+makes the method of extracting data more consistent. The nature of the
+procedure development may also prompt researchers to more
+carefully consider biases introduced through their methods.
+Each step in the procedure must be actively considered to be incorporated,
+whereas unconscious passivity is possible in manual actions
+performed in a repetitive manner.
+The less laborious effect of automated procedures may also benefit researchers
+by allowing them to more quickly and easily test the effects
+of small changes to data extraction and analysis, as opposed to the significant
+time and effort to reproduce changes to manual routines. This reduced barrier
+to iteration could encourage researchers to test a larger number of iterations
+data extraction methods, potentially even resulting in more refined results.
+
+\subsection*{Acknowledgements}
+A special thanks to the beamline scientists at the Advanced Photon Source
+that make themselves available at odd hours to keep experiments at the
+facility running smoothly and to the students of the Center for Advanced
+Non-Ferrous Structural Alloys that agreed to work all the other odd hours to
+run the experiments and collect the simulated AM data.
+

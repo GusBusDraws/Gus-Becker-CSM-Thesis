@@ -1,0 +1,103 @@
+% -------------------------------------------------------------------------
+\subsection{introduction}
+% -------------------------------------------------------------------------
+Metal additive manufacturing (AM) encompasses a promising collection of
+manufacturing techniques in which metallic parts are created layer by
+layer. These techniques can create parts with complex geometries that are
+not achievable with more traditional, subtractive techniques
+\cite{Chu2008}. However, these techniques are not without their own
+challenges. AM-built parts often produce columnar dendrites during
+solidification. These anisotropic microstructures can lead to hot tearing
+\cite{Kaufmann2016,Martin2017,Gu2019}.
+% and anisotropic material properties?
+While there has been some success
+leveraging anisotropy to intentionally localize properties in AM-built
+parts \cite{Dehoff2015,Plotkowski2021}, isotropic microstructures are
+usually preferred to reduce the tendency for cracks to form. This requires
+the growth of equiaxed grains as opposed to columnar grains. Many methods
+have been successful in encouraging equiaxed grain growth, including
+alteration of alloy composition \cite{Spittle2013,Bermingham2019,Zhu2019},
+addition of grain nucleating nanoparticles \cite{Martin2017,Gu2019}, changing
+build height \cite{Qiu2015}, changing feedstock rate
+\cite{Wu2004,Qiu2015}, and changing laser/electron beam processing
+parameters like power \cite{Qiu2015,Balla2016,Kurzynowski2018}, scan speed
+\cite{Wu2004,Qiu2015,Balla2016}, scan strategy
+\cite{Dehoff2015,Kurzynowski2018}, and beam shape \cite{Roehling2020}.
+A series of models have enabled studies of the effects of beam
+processing parameters on melt pool dynamics and resulting microstructures.
+The first of such models was developed by Hunt to analytically describe
+the growth of equiaxed grains ahead of the columnar solid-liquid (S-L)
+interface, shedding light on the columnar-to-equiaxed transition (CET)
+\cite{Hunt1984}. This original CET model was developed for casting
+applications, but the Kurz-Giovanola-Trivedi model describing rapid
+solidification in the growth of columnar dendrites \cite{kgt1986} enabled
+Gäumann et al. to extend Hunt's model to rapid solidification
+\cite{Gaumann1997,Gaumann2001}. The latter work of Gäumann et al.
+provided a simplified relationship between temperature gradient (G),
+solidification velocity (V), and a material constant (K), which enables
+predictions for when an alloy system undergoes equiaxed versus columnar growth.
+Using this relationship, studies have predicted and verified
+microstructures for varying processing parameters by comparing V, as
+calculated from experiments, and G, as estimated with heat transfer
+simulations in G-V maps
+\cite{kgt1986,Kurz2001,Kurz2001b,Gaumann2001,Kobryn2003,Dehoff2015,Saville2021,Roehling2020,}.
+These microstructure maps overlay experimental data with regions corresponding
+to columnar, equiaxed, and mixed microstructures. Microstructure
+maps can also be express process parameters directly, rather than G
+and V, to determine combinations of processing parameters likely to
+produce optimal microstructures \cite{Liang2016,Liang2017}.
+
+With the opportunity to view melt pool evolution and development of
+microstructures under AM-like conditions in situ comes the task of
+tracking image features across the duration of solidification.
+This feature tracking is often performed manually with some kind of
+image viewing and annotation software like \textit{ImageJ} \cite{imagej}.
+Manual tracking has been used to track droplet spatter
+\cite{Leung2018nat,Leung2018am}, melt pool length/depth and overall area
+shrinkage \cite{Leung2018am}, pores \cite{Leung2018nat,Martin2019}, vapor
+depression/keyhole depth \cite{Martin2019,Cunningham2019}, powder motion
+and spattering \cite{Guo2018}, melt flow within the melt pool via tracing
+particles \cite{Hojjatzadeh2019}, and melt pool volume \cite{Guo2019}.
+
+Most studies in literature do not explore automated methods of analyzing
+melt pool features, although a procedural method for identifying interfaces
+of melt pools has received a brief explanation in some studies
+\cite{Zhao2017,Wolff2019}. In these studies, the interfaces
+are identified on a row-by-row basis, based on local peaks in the second
+derivative of the radiographs. This methodology is provided in the
+supplementary materials, however, and no further explanation is given into
+how the peaks of the derivatives corresponding to the interfaces are
+selected from the other peaks present.
+
+The goal of this work was to investigate the possibility of automating
+analyses necessary to calculate solidification velocities for the
+prediction of microstructure based on processing parameters. The
+successful execution of this type of automation would remove some inaccuracies
+related to human error and inconsistent subjective judgements across
+different researchers, while also improving analysis efficiency. Automatic
+analysis procedures are developed for two solidification experiments: an
+AM simulator experiment and a rapid solidification experiment. The AM
+simulator was developed at section 32-ID-B of the Advanced Photon Source
+(APS) synchrotron facility at Argonne National Laboratory \cite{Zhao2017}
+to simulate laser powder bed fusion (LPBF): an AM
+technique in which material is fused together, one layer at a time, using
+a high-energy laser \cite{King2015}. That said, the AM simulator may also be
+used more generally to observe laser-substrate interactions (i.e., a
+substrate without a powder layer).
+Hard x-rays and high-speed x-ray detectors are used
+to image the melting and solidification of Ni-1.9 Mo-6.6 Al (wt.\%)
+single crystals in situ, revealing the melt pool such
+that the S-L interfaces can be identified and tracked. The resulting location
+information of the S-L interfaces are used to calculate solidification
+velocities under LPBF-like conditions. The rapid solidification
+experiments were performed by melting thin films
+(approximately 100 nm in thickness)
+of Al-3 wt.\% Si on an amorphous silicon nitride substrate and
+monitoring the solidification using a dynamic transmission electron
+microscope (DTEM) at Lawrence Livermore National Laboratory. DTEM has
+proven to be useful in many rapid solidification studies
+\cite{LaGrange2006,LaGrange2008,Kim2008,Campbell2010,Kulovits2011,LaGrange2012,Santala2013,McKeown2014,Zweiacker2015,LaGrange2015,Roehling2017,Ji2023}.
+% Split this into many solidification experiments including x, y, z?
+For each analysis procedure performed here, the automated measurements
+are compared to manual measurements to assess the performance of the procedures.
+

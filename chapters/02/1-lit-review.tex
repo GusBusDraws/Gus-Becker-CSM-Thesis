@@ -1,0 +1,248 @@
+This chapter presents background information necessary to understand the
+motivations behind the work presented in this thesis.
+
+\subsection{X-Radiography}
+In a university laboratory in 1895, Wilhelm Conrad Röntgen was studying
+cathode rays when a crystal began mysteriously fluorescing. Further
+investigation led Röntgen to believe he had discovered a previously
+unknown type of radiation. He developed experiments to compare these newly
+discovered rays with visible light and published the data, using the term
+``x-rays'' to describe this new type of radiation ``for the sake of brevity''
+\cite{Rontgen1896}. Röntgen also includes the first published x-radiographic
+image, or radiograph, in this work: a human hand showing the skeleton
+within and a ring on one finger.
+
+Today, x-radiography is a powerful tool that takes advantage of the
+interaction between matter and photons in the x-ray energy range. Photons
+can be absorbed, reflected, and transmitted through matter. By exposing a
+sample of interest to x-ray photons, information can be inferred about the
+volume of the exposed sample by detecting the transmitted. The extent of
+transmitted photons collected on the surface of a detector convey
+information as a two-dimensional projection. The projection of transmitted
+x-rays was first recorded via photographic film, but x-rays are now
+typically converted to visible light via scintillator and  captured on a
+charge coupled device (CCD) that converts the visible light into a digital
+radiograph. The intensity of each pixel in a radiograph is proportional to
+the number of photons incident to a corresponding location on the detector
+over some integration time. High photon flux on the detector corresponds
+to regions of a material with high x-ray transmittance, whereas lower
+photon flux corresponds to regions of the material absorbing or otherwise
+deflecting x-rays. Regions of the detector recording many photon
+interactions are represented as light pixels in the radiograph, whereas
+regions recording fewer photon interactions are represented by darker
+pixels. Since x-radiography can convey information about the inside of a
+material without physically exposing the inside, the technique is often
+classified as a non-destructive testing technique.
+
+There are many challenges associated with x-radiography applied to the
+study of materials. The x-rays generated from traditional x-ray sources
+are typically created by impinging an electron beam onto an anode. The
+spatial resolution of the x-radiography possible with x-rays generated in
+this manner can be improved by focusing the electron beam onto a
+micron-sized area. While x-rays were quickly adopted in the medical field
+and to other static applications, the technique wasn't applied to the
+in-situ study of materials until Miller and Beech utilized an x-ray tube
+with a micron-sized focus area to study the solidification of binary
+alloys \cite{Miller1972}. In this study, the authors demonstrate
+x-radiography of Al-Cu and Al-Sn during solidification with a spatial
+resolution of 10 µm, noting choice of alloy system as an important factor
+in this type of in-situ study. Light alloys with low x-ray absorptive
+coefficients serve as good candidates, as this allows for a greater rate of
+x-ray transmission, minimizing the exposure time for the transmitted
+x-rays and therefore reducing blur in the image. The authors also note
+that contrast is improved in binary alloys in which the x-ray absorptions
+of the constituent elements differ. In a following study, Miller et al.
+detail their experimental setup \cite{Miller1975}. For samples of 300 µm
+thickness, two recording methods are explained. Film is used to report a
+spatial resolution of 10 µm with an exposure time that varies from 0.4 to
+2.5 s and an interval between exposures from 5 to 30 s as the film is
+pulled by hand to be advanced. A continuous observation method is also
+reported using a TV monitor, allowing pictures of the screen to be taken
+with an exposure time of 0.03 s, however the spatial resolution is
+compromised to hundreds of microns due to the resolution limitations of
+the fluorescent screen. Even still, the field-of-view is around
+50 mm\textsuperscript{2} to
+each side. Subsequent studies with similar x-ray systems use in-situ
+x-radiography to observe the dissolution of solid gold and silver into the
+less-dense, liquid sodium \cite{Cappleman1982}, the diffusion of ions
+\cite{Rondot1994}, and further metallic solidification \cite{Barber1995,
+Koster1997, Curreri1996, Kaukler1997}. This method eventually become known
+as microfocus x-radiography due to the micron-scale focus area necessary
+to produce x-rays with sufficient imaging properties.
+
+Mathiesen et al. published early work using synchrotron sources for
+x-radiographic analyses of materials \cite{Mathiesen1999}. Until this
+time, the only in-situ study of materials with synchrotron x-rays had been
+x-ray topography, in which an image is image constructed based on
+differences of the extent of diffraction of incident x-rays
+\cite{Lang1959}. This differs from a radiographic image in which the
+extent of absorption is exploited for image contrast. Just like with
+x-radiography, x-ray topography was first applied to the in-situ
+observation of materials with laboratory x-ray sources \cite{Chikawa1972,
+Chikawa1974, Kobayashi1984} but later studies extended the method to
+synchrotron x-ray sources \cite{Yamada1987, Grange1994}. The research
+performed by Mathiesen et al. used x-rays generated by synchrotrons to
+observe dendritic solidification in Sn-Pb and Al-Cu alloys, stating this
+type of work was not feasible with the spatial and temporal resolutions
+possible with synchrotron x-ray topography or microfocus x-radiography at
+the time \cite{Mathiesen1999, Mathiesen2002}. The authors report spatial
+resolutions around 2.5 µm and exposure times of as little as 0.25 s. This
+increased resolution comes at the cost of a 1.4 mm\textsuperscript{2}
+field-of-view, which
+is smaller than achievable with microfocus x-radiography. In 2011, the
+portability of microfocus x-radiography was exhibited with a study that
+developed a setup to enable x-radiography in microgravity for the study of
+solidification \cite{Rakete2011}. This led to a sounding rocket study in
+which the solidification of an Al-Cu alloy was observed solidifying in situ
+with microfocus x-radiography \cite{Nguyen2013}.
+The improved spatial and temporal resolutions possible with synchrotron
+x-radiography make the technique preferable compared to microfocus
+x-radiography for in-situ studies of quickly developing material processes
+occurring at the near-microscope scale
+\cite{Nguyen2003, Husseini2008, Clarke2015}.
+
+\subsection{Additive Manufacturing}
+Additive manufacturing (AM), in which 3D parts are built
+layer by layer, as opposed to
+traditional subtractive processing methods, is an area of materials
+research where high spatial and temporal resolutions are important.
+Observing these AM processes in situ can further the understanding of the
+connections between processing parameters and developed microstructures
+in resulting as-built parts. Direct AM processes can be divided into
+powder bed fusion (PBF) and direct energy deposition methods (DED)
+\cite{Sames2016, Debroy2018}. PBF methods involve a focusing energy to
+melt or sinter powder \cite{Gibson2015pbf, Sun2017}, whereas DED methods
+generate a melt pool with focused energy into which additional material is
+deposited \cite{Gibson2015ded}. Laser powder bed fusion (LPBF) is an
+example of a PBF process in which a laser is scanned across a bed of
+powder, layer by layer, according to 3D model data. The powder is melted,
+and upon solidification, is joined to the layer below \cite{King2015}.
+Simulated LPBF was monitored in situ using synchrotron x-radiography was
+achieved with a temporal resolution of 20 µs (50 kHz frame rate) to
+monitor the \cite{Zhao2017}. This technique has enabled many in-situ
+studies of LPBF including the evolution of vapor-filled depression, or
+keyhole, morphologies \cite{Cunningham2019}, fluid dynamics in the melt
+pool \cite{Leung2018nat, Guo2020}, pore formation \cite{Martin2019}, powder
+spattering \cite{Guo2018}, melt pool variation \cite{Guo2019}, and dynamic
+fracture behavior \cite{Parab2019}.
+
+\subsection{X-Ray Computed Tomography}
+X-ray computed tomography (XCT)
+is another useful technique to aid in the study of AM processes. This
+technique is not in situ, but XCT can data is 3D in nature and can advance
+understandings of dynamic processes by analyzing the properties of parts
+built using AM processes. Experiments varying processing parameters like
+laser power, scan velocity, and scan spacing, followed by analysis of
+resulting parts with synchrotron XCT enabled the connection between
+processing parameters and porosity in electron beam PBF
+\cite{Cunningham2016} and LPBF \cite{Cunningham2017}.
+
+Microfocus x-rays can also been used to study AM processes using XCT, and
+present some benefits compared to synchrotron XCT. Microfocus x-ray
+sources are capable of higher x-ray energies than synchrotron x-rays.
+Higher energy x-rays have a higher penetration capability, allowing for
+imaging of larger samples. This allows for AM studies to be performed at
+the scale of full parts. Microfocus XCT, or microCT, has connected
+processing parameters to resulting porosity for a full cubic sample with
+an edge length of 5 mm \cite{Duplessis2019}. Imaging at the scale of a
+full part has also enabled the analysis of 3D surface roughness of an
+AM-built structure \cite{Kerckhofs2013}. In addition to higher x-ray
+energies, microCT also has the benefit of being performed in a laboratory,
+as opposed to a synchrotron user facility. This experimental flexibility
+is represented in a workflow developed to quantifying porosity and enable
+the optimization of AM processing parameters for quality control purposes
+\cite{Duplessis2018}.
+
+\subsection{Image Segmentation}
+Image segmentation is an important tool in CT analysis workflows as well
+as other image-based methods of analysis. Segmentation is the isolation of
+specific features in an image such that those features can be analyzed and
+quantified. For example, the pores identified in the studies mentioned
+previously \cite{Duplessis2019, Duplessis2018} were segmented from the
+surrounding sample in order to analyze their location, size, and
+distribution. In 2D image analyses, segmentation is often performed
+manually by annotating features in an image using graphical user interface
+(GUI) software such as ImageJ \cite{imagej} or even with Python using
+packages such as napari \cite{napari}. Annotation may involve placing
+points on an image or drawing boundaries such that the image can be
+divided into separate regions. Specifying a threshold value is another
+method of segmenting an image which removes some of the workload required
+when manually annotating images. This is especially useful in 3D data when
+features are spread across multiple images. By selecting an intensity
+value, the image can be segmented into two regions above or below that
+value, either in a single 2D image or a stack of 2D images representing a
+3D volume. This type of method is still manual because the threshold value
+is chosen, however algorithms also exist for calculating a threshold value
+for a given image. Otsu's method is a thresholding algorithm that
+calculates one or multiple threshold values based on the distribution of
+intensities in an image and the desired number of classes into which the
+image will be segmented \cite{Otsu1979}.
+
+Watershed segmentation is a technique that can be used to algorithmically
+segment features in an image \cite{Beucher1979, Soille1990viscomm,
+Soille1990sigproc, Vincent1991}. The name comes from a metaphor used to
+describe the technique: a simulated flooding process is applied to an
+image that acts as a topographic surface. The ``water'' starts at a level
+below all intensities (elevations) in the image, and rises progressively.
+The first time water rises above the level of a region unconnected to
+another filled region, it creates a new catchment basin. Wherever two
+catchment basins come together, a ``dam'' is constructed, demarcating the
+segmented regions when the flooding is over. In addition to basic
+watershed segmentation in the simulated water floods the image uniformly,
+marker-based watershed segmentation is also possible in which seed points,
+or markers, are used as starting points for the flooding, causing these
+points to act as ``pour points,'' using the same metaphor \cite{Moga1998,
+Parvati2008}. Watershed algorithms are also able to operate in 3D even
+though the flooding metaphor does not withstand the addition of a
+dimension. Watershed algorithms serve an important role in the workflows
+of many fields, from cell nuclei \cite{Wahlby2004, Cheng2009} to stone
+aggregates \cite{Kim2003, Burgmann2022}.
+
+Any image passed into an image analysis algorithm yield the same results,
+improving reproducibility of image analysis workflows. It's important to
+note that reproducibility is not the same thing as objectivity. This is
+not only because algorithms are human constructs, but also because the
+implementation of algorithms involves subjective decisions
+\cite{Tadrous2010}. While the same image input into an algorithm will
+yield the same results, the application of any preprocessing steps can
+alter the results. To maximize reproducibility, it is important to note
+every step in an image analysis workflow. This can be done by listing out
+processing steps performed or by writing analysis workflows as scripts
+that can be run again using software like Python or MATLAB. Even GUI
+software like ImageJ sometimes have the capability recording or writing
+workflows as reproducible macros or scripts. \textit{Jupyter} notebooks
+are another good option for image analysis workflows \cite{jupyter}.
+The cell-based
+structure of \textit{Jupyter} notebook files enables incremental execution of
+processes to show results of a workflow at multiple phases, rather than at
+the end only. This can be useful to see how an image evolves through a
+process.
+
+\subsection{Image-Based Modeling}
+Beyond revealing information statistical information about the size,
+shape, and distribution of features in an image, the results from image
+segmentation can be used in computer simulations. In biology and
+biophysics, CT scans and MRIs of organs enable realistic geometries in the
+simulation of computational fluid dynamics (CFD) of bloodflow
+\cite{Hoeijmakers2019}, heat transfer for cancer cryosurgery
+\cite{Zhang2005}, tumor shrinkage and treatment planning in radiation
+therapy \cite{Chao2010, Le2016, Rangraz2019}, and electromechanical
+turbulence in the heart \cite{Christoph2018}. In neuroscience, fluorescent
+microscopy and structured illumination microscopy enable cell-modeling of
+non-neuron brain cells \cite{Savtchenko2018} and computational geometry
+analysis of neuron features \cite{Kashiwagi2019}. In the study of Li-ion
+batteries, focused ion beam scanning electron microscopy, EDS, and XCT
+enabled the mechanical and electrochemical response simulations
+\cite{Hutzenlaub2014, Mendoza2016, Muller2018, Lu2020}. In materials
+science synchrotron XCT enabled the characterization and simulation of
+thermal conductivity in 3D composite textile architectures for space
+applications \cite{Vanaerschot2017, MacNeil2019, Semeraro2021} and
+microscale finite element modeling of fiber reinforced polymers
+\cite{Nikishkov2013, Czabaj2014, Sencu2016}. In geoscience, microfocus
+XCT enabled the simulation of CFD in porous media at the pore scale
+\cite{Shah2016}. In each of these cases, segmentation was used in some
+form, but segmentation is not perfect, and quantifying uncertainty in
+segmentation results is a way to understand how that uncertainty can
+affect the simulations in which the segmentations are used
+\cite{Krygier2021, Le2016}.
+

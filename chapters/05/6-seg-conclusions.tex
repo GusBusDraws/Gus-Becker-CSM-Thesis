@@ -1,0 +1,23 @@
+\subsection{Conclusions}
+This work presented a procedure to improve the segmentation of
+irregularly-shaped, multi-sized, and tightly-clustered particles
+using a method that merges regions based on edge strength.
+A 2D image taken from a 3D XCT scan of polymer-bonded sand grains was
+used as an example image. The procedure preprocesses the image to
+create a binary image separating the sand grains from the background and
+generates a set of markers to intentionally over-segment the particles.
+The majority of the procedure lies in a custom algorithm which utilizes
+Delaunay triangulation to merge neighboring regions that are not found to
+be separated by an edge.
+
+The merged-region segmentation appears to be an improvement over a typical
+watershed segmentation, however a manual segmentation was also performed
+and used as a baseline to quantitatively assess the improvement.
+The fit between the manual segmentation and merged-region segmentation is
+calculated and compared to the fit between the same manual segmentation
+and the typical watershed segmentation.
+The merged-region segmentation was calculated to be an 89.02\% fit with
+the manual segmentation. This is a 6.93\% improvement over the typical
+watershed segmentation, which was calculated to be an 82.09\% fit with the
+same manual segmentation.
+

@@ -1,0 +1,98 @@
+% Implementing edge strength corrections to improve segmentation of
+% irregularly-shaped, multi-sized, and clustered particles in
+% two-dimensional images
+\subsection{Introduction}
+Image segmentation often plays a crucial role in digital image processing
+workflows. Segmentation enables the extraction of quantitative information
+from images that is only qualitatively available through visually analysis
+alone. Segmentation can be split into two categories: semantic segmentation
+and instance segmentation. In semantic segmentation, an image is separated,
+or segmented, into classes for analysis, often the regions of interest
+(the foreground) and the background.
+The result of this type of segmentation is a binary
+image, so this process can be referred to as binarization. A simple way to
+binarize an image is by selecting a threshold value such that pixels with an
+intensity above this value are categorized as one of the binary labels,
+while the pixels with an intensity below the thresholding value are
+categorized as the second label. The threshold value is often selected
+manually, but an algorithm can also be used to calculate this value. A
+useful and well-known thresholding algorithm is Otsu's method \cite{Otsu1979},
+which computes an
+optimal threshold value by analyzing the image histogram. The histogram is
+split into classes at different values, and a ``goodness'' factor, defined
+by considering within-class and between-class variances, is optimized to
+determine the threshold value.
+
+The second type of segmentation, instance segmentation, is used to separate
+specific instances of a class within an image.
+Instance segmentation can
+separate features within the foreground from one another to enable analyses
+including feature locations, sizes, and shapes.
+In some cases, it may be possible to separate multiple objects based
+on gray value alone by setting multiple threshold values,
+however instance segmentation can also be performed by analyzing the
+morphology of a semantic segmentation.
+One such method involves
+morphological watersheds, and is typically referred to as watershed segmentation
+\cite{Beucher1979,Serra1988,Soille1990sigproc,Soille1990viscomm,Beucher1992}.
+Watershed
+segmentation algorithms take their name from the analogy of ``flooding'' an
+image by interpreting each intensity value as a height, as if the image is
+describing a topographic surface. When a flooding operation is performed
+algorithmically, the local minima of the image act as ``catchment basins''
+which fill until a flood reaches a neighboring flood, at which point a
+``dam'' is created to prevent the floods from merging. After this process is
+completed, the lines representing the dams remain, thus segmenting the
+image. As most images wouldn't appear to represent a logical
+three-dimensional surface, a transformation of some kind is often applied
+before watershed segmentation. This can be done using the Euclidean
+distance transformation, which maps each foreground pixel of a binary
+image to an intensity representing the distance to the nearest background
+pixel \cite{Danielsson1980}. Distance transformations are usually inverted
+before applying a
+watershed segmentation algorithm so the pixels farthest away from the
+background (local maxima) will be converted to local minima
+that will be filled first by the flooding simulation.
+
+Watershed segmentation algorithms can operate by providing a list of
+markers which seed the catchment basins used in the algorithm
+\cite{Moga1998,Parvati2008}. These
+markers provide locations to begin algorithmic flooding at the same time,
+regardless of the pixel intensities (``heights'') of these locations.
+Markers can thus be
+thought of as ``pour points.'' This can be useful to control
+over-segmentation (more segmented regions than expected) and
+under-segmentation (fewer segmented regions than expected) because in
+marker-defined watershed segmentation, the number of markers determines
+the number of catchment basins and therefore the number of final segmented
+regions. The limitations of segmenting an image via watershed algorithm
+are often related to the method employed to define the markers. A
+common method of generating markers is to calculate the minima of the
+inverse distance transformation. However, this can lead to spurious local
+minima for irregularly shaped and/or clustered particles, resulting in
+over-segmentation \cite{Sun2017}. In these cases, rather than calculate
+all local minima, \textit{h}-minima can be calculated such that each minima
+is a value \textit{h} above any surrounding minima \cite{Cheng2009,Jung2010}.
+
+A downside to using \textit{h}-minima for marker generation is that this can
+suppress legitimate minima corresponding to smaller particles when a variety
+of particle sizes are present. This has been addressed with an adaptive
+\textit{h}-minima method for selecting watershed markers \cite{Burgmann2022}.
+This method uses dynamic \textit{h} values determined by setting a lower and
+upper \textit{h} value for the intensity range of the image. For an inverse
+distance transform, the \textit{h}
+value range is set such that minima with lower intensities (i.e., points
+farther from edges) have a higher \textit{h} value than minima with higher
+intensities (i.e., points closer to edges). This translates to allowing
+minima to be selected that are closer together around small objects in the
+image but farther apart around larger objects. Another method is to remove
+minima within a set radius determined by the comparison of intensities
+between each minima and the surrounding minima \cite{Sun2017}.
+This is based on the
+assumption that spurious minima are caused by irregularly-shaped or
+overlapping objects. Rather than suppress markers before seeding a
+watershed algorithm, another method addresses over-segmentation by
+detecting strong edges using the Canny edge filter and merging segmented
+regions if the shared boundary does not exist on an edge, as long as the
+edge is strongly defined \cite{Canny1986,Kim2003}.
+

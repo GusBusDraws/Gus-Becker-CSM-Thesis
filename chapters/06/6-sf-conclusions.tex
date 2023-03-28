@@ -1,0 +1,49 @@
+% 6.6 Conclusions
+\subsection{Conclusions}
+This work presents \textit{Segmentflow}, a segmentation workflow tool
+that can be used to generate geometries for use in physics simulations.
+A workflow is demonstrated that takes a CT scan of a mock high explosives
+system consisting of F50 sand grains coated in a polymeric binder.
+The CT scan was subject to a preprocessing procedure to increase the
+contrast of the image, at which point it was semantically segmented
+into regions labeled as one of three classes: void, binder, or sand grain.
+The regions corresponding to the sand grain class were subject to an
+instance segmentation procedure with the goal of segmenting and labeling
+voxels identified as individual sand grains. These segmented particles are
+dependent on the markers used to seed the segmentation algorithm.
+A variety of markers were selected by specifying a range of minimum
+distances separating the points. Each set of markers produced a different
+segmentation. The segmented particles resulting from each separate
+segmentation were analyzed to assess the segmentations.
+
+Segmented particles resulting from five segmentations were analyzed.
+The size distribution of the segmented particles
+for each segmentation was compared with the typical F50 sand size
+distribution to determine which segmentation yielded the most
+accurate segmentation. Two methods were used to determine the size
+distribution of the segmented particles from each segmentation. The first
+method used the volume of each segmented particle and calculated the diameter
+of the sphere of equivalent volume. This diameter was used to bin each
+particle between the mesh sizes defined by the typical F50 distribution.
+The second method used the aspect ratio of the bounding box of each particle
+and used the maximum length of the minimum cross section of the box to bin
+the particles. The sum of accumulated error was calculated for each method
+and the total accumulated error, summing the error from each method,
+was calculated for each of the five segmentations. The segmentation that
+was seeded by markers with a 6 pixel (83.04 µm) minimum peak distance was
+determined to have the lowest total accumulated error. A slice corresponding
+to the same location of the sample volume was taken from each of the
+three segmentations with lowest error and compared to provide a visual
+example of the quality of the segmentations.
+
+The segmented particles resulting from the segmentation with lowest error
+was used to demonstrate the surface meshing capabilities of
+\textit{Segmentflow}. The surface meshes were visualized together to show
+the complete geometry of the sample. Postprocessing capabilities were also
+demonstrated by comparing the unaltered surface mesh with smoothed and
+simplified representations. The particle was shown to maintain its
+general shape even when the number of triangles making up the surface
+was reduced by more than two orders of magnitude. This shows an important
+ability of \textit{Segmentflow} to control the complexity of geometries
+and therefore the simulations for which these geometries will be used.
+

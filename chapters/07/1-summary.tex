@@ -1,0 +1,268 @@
+% Chapter 7: Summary and Conclusions
+This chapter summarizes the each previous chapter.
+Conclusions are also provided which address each of the research-driving
+questions posed in Chapter \ref{ch/intro}.
+
+\subsection{Summary}
+% -------------------------------------------------------------------------
+Following the introduction in Chapter \ref{ch/intro} and the literature
+review presented in Chapter \ref{ch/lit-review}, many topics were
+covered in Chapters \ref{ch/xray} through \ref{ch/sf}.
+Chapter \ref{ch/xray}
+presented a method for correlating x-ray intensity to sample composition
+by comparing intensity profiles in a radiograph to an EDS line scans
+measuring composition.
+Chapter \ref{ch/melt} presented two automated procedures for identifying
+and tracking the solidification of metallic samples following
+laser melting. The results from each procedure were compared to manual
+measurements to assess the success of the automation.
+Chapter \ref{ch/seg} presented a new method for the segmentation of
+irregular particles that cannot be accurately segmented
+with usual methods described in literature. This method proposed an
+extension to a typical segmentation method that produced results that
+were calculated to more closely match a manual segmentation than a
+typical segmentation on its own.
+Chapter \ref{ch/sf} presented a Python package developed to establish
+a workflow for creating 3D geometries from images to be used in physics
+simulations. A segmentation workflow is demonstrated to generate surface
+meshes from an XCT scan of the plastic explosive surrogate material
+system F50 sand and Kel-F. Resulting segmented particles are analyzed
+by comparison with a typical size distribution of F50 sand.
+
+\subsection{Conclusions}
+% -------------------------------------------------------------------------
+The work presented in Chapters \ref{ch/xray} through \ref{ch/sf} each
+address one of the research questions posed in Chapter \ref{ch/intro}.
+Conclusions for the work presented in each chapter are presented below in
+the context of the corresponding research question which drove the work.
+
+\subsubsection{Relating X-Radiography to Composition}
+% -------------------------------------------------------------------------
+\noindent \textit{
+    How can in-situ x-radiography be used in conjunction with
+    other methods of analysis to infer composition of an Al-Ag alloy during
+    solidification?
+}
+
+Chapter \ref{ch/xray} proposed a proof-of-concept, multimodal approach
+to solidification analysis of an Al-Ag alloy system combining three
+separate methods of investigation.
+In-situ x-radiography measured changing grayscale intensities
+through the sample volume during solidification,
+EDS measured composition at the surface of the as-solidified
+sample, and the calculation of a Scheil solidification model
+which provided compositional information throughout a theoretical
+solidification.
+Aligning the final x-radiograph with the SEM image
+showing the track of the track of the EDS scan allowed for an intensity
+profile to be generated along the same solidified structure. Even though
+the radiography captured the entire thickness of the sample and the
+EDS measured only the surface, the two datasets showed similar trends
+in multiple regions in the sample. These trends show that a mapping
+from x-ray intensity to composition could be possible without performing
+an explicit calibration experiment.
+The Scheil solidification model calculated the composition of the solid
+forming at different temperatures, simulating the solidification of an
+alloy system matching that of the sample. The resulting data was plotted
+as solid composition versus fraction solid. This data was fit to the
+manually annotated radiographs to create a mapping from the image number
+to solid composition. The as-measured data fits reasonably well at the
+beginning of the solidification, though after about 75\% of the sample
+solidified, the fraction solid as-measured was larger than the values
+calculated from the Scheil model. A potential cause for this discrepancy
+was that manually annotated solidifying structures, used to calculate
+solid fraction, were not completely solidified through the entire
+thickness of the sample as assumed.
+While this work did not make direct correlations between these three
+analysis methods, the comparisons provided more insight into the
+solidification than either of the three methods would have provided on
+its own.
+With more experiments performed, the relationships between the different
+methods could be identified to more confidently infer composition from
+the in-situ x-radiography intensities.
+
+\subsubsection{Procedural Analysis of Melt Pool Tracking}
+% -------------------------------------------------------------------------
+\noindent \textit{
+    How successful is an image processing procedure at automating the
+    identification, tracking, and velocity calculation of solid-liquid interfaces
+    during in-situ solidification experiments?
+}
+
+Chapter \ref{ch/melt} explored the efficacy of automated procedures for
+identifying, tracking, and calculating the velocity of metallic solidification
+processes observed in situ. Two types of procedures were developed and tested:
+the first for synchrotron x-radiography monitoring of AM
+simulator experiments and the second for DTEM monitoring of thin film,
+rapid solidification experiments.
+The results from each procedure were compared to manual measurements. In the
+AM simulator experiments, the automated procedure was reasonably successful
+identifying the interfaces when compared to the manual measurements.
+For two of the three experiments on which the procedure was applied, the
+mean solidification velocity calculated from the detected interfaces
+was drastically different than the manually measured velocities,
+but the median values were similar. The average deviation from the manual
+mean velocity was also higher for the detected data, but half the detected
+data were within the average deviation for one of the experiments, and the
+majority for the other experiment, which suggests that the error
+in the detected measurements was mainly due to large outliers from
+detected noise. In the third experiment, the mean detected velocity
+was the same as the mean manual velocity, but the median velocities
+differed. This suggests that the deviations were balanced above and below
+the mean. Like the previous experiments, the average deviation from the
+manual mean was still higher for the detected velocities than for the
+manual measurements, but the majority of detected data was within the
+average deviation from the manual mean, suggesting once again that the
+majority of the error comes from the outliers in the data.
+
+In the rapid solidification experiments, the outlined procedure is able
+to accurately track the interface throughout the entire solidification
+process according to comparisons with the manual measurements. The velocity
+calculations were also in agreement with the manual calculations for the
+majority of the experiments, with the exception of the end of the third
+experiment where the melt pool much smaller and disappears before the last
+frame of the experiment. One reason the rapid solidification procedure
+performed better than the AM simulator procedure is because the melt pools
+generally stayed large enough to not be confused with noise (besides the
+end of the third experiment). The rapid solidification procedure also
+incorporated an optimization step. If something similar was included for
+the AM simulator experiment, the results might have been less sensitive
+to noise.
+
+Beyond comparisons to manual results, there are additional benefits
+to the development of these automated procedures.
+Automated procedures allow for more consistent results
+than manual measurements. A procedure carried out by a computer will be
+performed the same way on any given dataset, regardless of the experience or
+biases of the user executing the method.
+The process of developing automated procedures may also be beneficial to
+the scientific process. When explicitly writing out a routine such that
+it can be interpreted by a computer, researchers may more closely consider
+their methods in a way uncovers previous unnoticed bias. Less justified
+analysis steps may be left out when a routine is made more explicit.
+Finally, automatic methods may encourage researchers to test changes in
+analysis methods which could lead to more refined results.
+One barrier to refining analysis methods is the effort and time required to
+test changes to these methods. Especially when results are not guaranteed to
+improve, high time and effort barriers may prevent these results from being
+tested. This can lead to analysis methods that deliver "good enough" results
+rather than analysis methods that are proven to be superior to other methods.
+However, with automated procedures, more iterations of analysis methods can
+be tested without the same time and effort commitment. This increases the
+chance that improvements to the analysis method can be discovered to improve
+results that otherwise may not have been tested.
+
+Overall, the success of image processing procedures in identifying, tracking,
+and calculating the velocity of solid-liquid interfaces was shown to be mixed
+when the measure of success is the accuracy related to manually determined
+values. The accuracy in the procedure which included an optimization
+step (thin film rapid solidification experiments) outperformed the procedure
+which did not include any optimization (AM simulator experiments). This
+suggests that incorporating an optimization step should be considered in
+development of similar procedures. Other benefits may include quantifying
+consistency, bias reduction, and time/effort reduction for tuning results.
+
+\subsubsection{Segmentation of Irregular and Tightly Clustered Particles}
+% -------------------------------------------------------------------------
+\noindent \textit{
+    How can the segmentation of multi-sized, irregularly-shaped, and
+    tightly-clustered particles be improved?
+}
+
+Chapter \ref{ch/seg} proposed a method for improving the segmentation
+of irregularly distributed features (e.g., sand grains) that are not
+accurately segmented using
+methods found in literature. A common method in literature for segmenting
+features of an image is the application of a watershed algorithm.
+Watershed segmentation enables features
+in contact with one another to be segmented as long as the size and shape of
+the features are roughly uniform.
+Even when the shapes are nonuniform, watershed segmentation can return
+accurate segmentation results as long as the features are roughly the same
+size. An adjustment to the routine can also be made that allows for
+multi-sized features to be segmented from one another, solving either over-
+or under-segmentation in these cases, as described in
+the introduction of Chapter \ref{ch/seg}.
+However, when features are not uniform in size or shape,
+the typical watershed segmentation does not yield accurate results.
+This inaccuracy is amplified when particles are clustered tightly
+enough to be misrepresented as even more irregular particles.
+The irregularity causes the resulting segmentation to contained a
+combination of over- and under-segmentation, which cannot be adjusted by
+methods in literature.
+
+This chapter presented an extension to typical watershed segmentation by
+including additional preprocessing steps which would intentionally generate
+over-segmented results. These resulting regions where then subject to a novel
+algorithm for merging regions based on edge strength between neighboring
+regions. This proposed algorithm relied on a Delaunay triangulation that
+identified neighboring regions across varying distances. These varying
+distances allowed for multi-sized features to be considered.
+The algorithm also relied on an assumption that neighboring regions
+adequately segmented would see an increase in intensity in an edge-amplified
+image. By assuming these spikes would not occur between two under-segmented
+features, the lack of presence of these spikes was used as a merging
+condition for neighboring regions.
+This method was tested on a 2D image taken from a 3D XCT scan of
+material system consisting of irregularly sized and shaped sand grains
+tightly clustered with a polymer binder. The results of the merged region
+segmentation were compared to a manual segmentation of the same image,
+along with the results from a typical watershed segmentation.
+The merged region segmentation achieved a fit of 89.02\%, a 6.93\%
+improvement from the typical watershed segmentation.
+
+\subsubsection{Generating Image-Based Modeling Geometries}
+% -------------------------------------------------------------------------
+\noindent \textit{
+    How can a workflow be designed to extract 3D geometries from x-ray
+    computed tomography data such that the geometry of a physical sample can be
+    reproduced digitally for use as initial conditions in an image-based physics
+    simulation?
+}
+
+Chapter \ref{ch/sf} presented \textit{Segmentflow}, a Python package
+for building and/or executing segmentation workflows to extract
+information from 3D datasets like XCT scans. The goal of these workflows
+is to create physically informed geometries for use in image-based physics
+simulations. \textit{Segmentflow} has tools for loading data and segmentation
+parameters, preprocessing images to improve contrast and/or reduce noise,
+performing semantic segmentation to classify scan data according to material
+type/class, performing instance segmentation by watershed algorithm,
+converting voxel data to surface meshes, and postprocessing surface meshes
+to fit the needs of a particular simulation/user.
+
+Functionality of \textit{Segmentflow} was presented by demonstrating a
+segmentation workflow for generating simulation-ready surface meshes from
+an XCT scan of a F50 sand and Kel-F binder system used to approximate the
+mechanical properties of high explosives. The XCT data was
+loaded with \textit{Segmentflow} and preprocessed to improve the contrast.
+The sample was expected to have three classes of material represented
+in the images: void, binder, and sand grain. Threshold values were calculated
+to segment the volume into these three classes, and a binary image was
+created to distinguish the sand grain class from the rest of the classes.
+This binary representation was used to calculate a set of markers which will
+each seed a watershed segmentation for a total of five separate
+segmentations. The resulting
+segmented particles from each of these segmentations were analyzed to
+calculate a size distribution calculated in two ways: from the sphere
+of equivalent volume and from the aspect ratio of the bounding box. The
+segmentation that produced particles with the smallest total accumulated
+error summed across both size distributions was assumed to be the most
+accurate. These segmented particles were converted to surface meshes, and
+all 41553 surface meshes were visualized together to show the extent of the
+sample. One of the particle surface meshes was used to show an example of mesh
+postprocessing. The example surface mesh, originally consisting of 1524
+triangles, was visualized side by side with the same surface mesh after
+a series of postprocessing steps. The first step shows the particle after
+Laplacian smoothing. This retains the number of triangles, but results in
+a surface mesh that appears less blocky. The next step shows the surface
+mesh after simplifying past 200 triangles to a total of 190 triangles. The
+final step shows the surface mesh reduced past 20 triangles
+to a total of only 10 triangles. This series of postprocessing steps
+shows how the surface mesh can be reduced drastically. This is an important
+capability of \textit{Segmentflow} as it gives the user the power to create
+simulation geometry that can have a range of complexity, depending on the
+desired scale of the simulation.
+
+
+

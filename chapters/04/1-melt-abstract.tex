@@ -1,0 +1,24 @@
+% \section{Abstract}
+In this chapter, procedures for detecting metallic melt pools are
+presented to automate the
+process of obtaining real-time solidification velocities to enable
+comparisons to process modeling and microstructural outcomes predicted by
+solidification theory and modeling. Procedures are developed to analyze
+two types of solidification experiments: simulated metal
+additive manufacturing (AM) of Ni-1.9 Mo-6.6 Al (wt.\%)
+single crystals captured with x-radiography at the Advanced Photon Source
+(APS) synchrotron facility at Argonne National Laboratory (ANL) and rapid
+solidification of Al-3 wt.\% Si thin films captured with dynamic transmission
+electron microscopy (DTEM) at Lawrence Livermore National Laboratory
+(LLNL). Each procedure differs due to the nature of the experiment, but
+each utilizes common Python libraries including \textit{NumPy},
+\textit{imageio}, \textit{scikit-image}, and \textit{napari},
+to perform steps including denoising, pseudo-flat-field intensity
+correction, segmentation, and optimization of ellipse fitting.
+The procedures are applied to three experiments of each type and the
+detected melt pool evolution is compared with
+manual measurements to show that the procedures are reasonably accurate.
+The AM simulator procedure is more prone to inaccuracies due to noise,
+and therefore less reliable than the rapid solidification procedure, which
+is more robust, partly due to a fit optimization step.
+

@@ -1,0 +1,112 @@
+% Chapter 7: Recommendations for Future Work
+The work presented in this thesis answered questions that were sought at
+the beginning of the project. In the process, however, more questions
+were discovered. These discoveries provide opportunities
+to compound the results presented in this thesis.
+This chapter addresses these opportunities by providing 
+recommendations for future work. 
+
+\subsection{Optimization of AM Simulator Detection}
+% -------------------------------------------------------------------------
+In Chapter \ref{ch/melt}, two procedures were presented detect the
+solid-liquid interface in a solidifying metal sample. The procedure
+developed first was for AM simulator experiments and was designed to
+detect semi-elliptical melt pools. The second procedure,
+developed after the first, was designed to detect elliptical melt pools in
+thin film, rapid solidification experiments.
+The procedures were similar, but the AM simulator procedure detected the
+bounding box of the semi-elliptical melt pools whereas the rapid
+solidification experiment optimized the fit of an ellipse to the
+elliptical melt pool. The rapid solidification procedure performed better
+than the AM simulator procedure. The incorporation of fit optimization may
+not have been the only reason for the improved performance, but
+incorporating some kind of an optimization step into the AM simulator
+would be a good place to start improving the procedure.
+
+The optimization included in the rapid solidification procedure optimized
+the fit of an ellipse to the melt pool. To bring optimization to the AM
+simulator procedure, a shape could similarly be fit to the data. However,
+the fit of the ellipse was optimized by minimizing a cost function that
+incorporated the mismatch of the ellipse with a binary image
+representation of the experiment. A cost function to be optimized to
+improve the fit of the AM simulator could include many different
+parameters besides fit mismatch. Other parameters could
+include detected melt pool aspect ratio, difference in size
+with the melt pool of the previous frame, difference in location of
+with previous melt pool, location relative to the center of the image,
+or location relative to the top of the sample.
+Exploring the optimization using some of these parameters would make for
+an interesting study that is likely to achieve promising results based
+on the number of possibilities alone.
+
+\subsection{Extension of Edge Strength Corrected Segmentation}
+% -------------------------------------------------------------------------
+In Chapter \ref{ch/seg}, a method was presented to correct the
+segmentation of irregularly-shaped, multi-sized, and tightly-clustered
+particles. The implementation of this algorithm was successful,
+however the presented routine was only applied in two dimensions.
+The image on which this routine was tested is itself from a
+3D dataset. This displays the biggest opportunity to be
+pursued following this work: adapting this routine to work with
+3D data. The watershed segmentation and Delaunay
+triangulation algorithms leveraged for this procedure can both function
+in three dimensions, so the main focus would need to adapt the region
+merging algorithm to 3D. A potential obstacle is the increase in the number
+of neighbors for marker will in the adaption to 3D. This may require
+optimization of the merging algorithm, depending on the size of the
+datasets to which the procedure is applied.
+
+Another path for continued study related to this method is further
+development of the criteria defining detected edges.
+The method as it stands has two conditions for detecting edges: a simple
+threshold dependent on the maximum intensity of the edge-amplified
+image and the location of any detected edges along the line connecting
+two markers/regions. Perhaps by applying more thorough signal
+processing techniques, a more robust criteria could be developed that
+wouldn't require fine-tuning on an image-to-image basis that is likely
+necessary with the current algorithms. A study on either or both of these
+extensions to this method would be interesting and useful, especially for
+the application of image-based simulations as discussed in Chapter \ref{ch/sf}.
+
+\subsection{Additional Segmentation Functionality for Segmentflow}
+% -------------------------------------------------------------------------
+Chapter \ref{ch/sf} presented \textit{Segmentflow}, a Python package for
+developing and/or executing segmentation workflows to create geometry
+that could be used as initial conditions in a physics simulation.
+\textit{Segmentflow} is a flexible software library that has been steadily
+increasing the more it is used and the more diverse its user base has
+become. There are many additional features that could be added, but some of
+the most scientifically interesting include additional methods for
+determining particle size distributions and the ability to merge
+segmentation results. In Chapter \ref{ch/sf}, size distributions were
+calculated for the segmented particles by binning particles by diameter as
+determined by either assuming the particle was a sphere or using the maximum
+bounds of a particle. The sphere method is obviously limited because
+most particles are not actually spheres. For very blocky
+particles, this may be an underestimate of size, but for most particles,
+this will be a overestimate of size since the particles may have volume
+distributed preferentially along one or two axes rather than all three
+equally. The limitations of the bounding box method, which determines the
+size based on the aspect ratio of the smallest box a particle could fit in
+does a better job of not overestimating size based on volume distribution,
+however, there are further limitations related to how a particle is oriented
+within the box. The box is constrained to the axes of the voxels, so if an
+oblong particle is oriented significantly askew to any of these axes, the
+bounding box will be much larger than the particle. A better method for
+approximating the size distribution of segmented particles would be to fit
+a tightly fitting ellipsoid around each particle, however this is not
+currently possible in \textit{Segmentflow}.
+
+As discussed in Chapter \ref{ch/seg}, segmenting irregular
+particles is difficult because if results are a mix of over- and
+under-segmented, the segmentation cannot be improved in both directions,
+which was the motivation for the Chapter \ref{ch/seg} in the first place.
+Perhaps rather than trying to correct results from watershed segmentation,
+methods of segmentation could be investigated. Many of the
+incorrect results that can result from watershed segmentation have complex,
+unnatural-looking forms. Rather than try to correct these forms after
+segmentation, a new segmentation method might be able to avoid these forms
+in the first place. One potential path for
+this kind of a study would be to investigate a method to
+incorporate minimization of surface energy into a segmentation algorithm.
+

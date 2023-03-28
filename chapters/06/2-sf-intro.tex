@@ -1,0 +1,92 @@
+% 5.1 Introduction
+\subsection{Introduction}
+\textit{Segmentflow} is a Python package for creating segmentation
+workflows which
+convert 3D image data to a format usable in image-based simulations.
+This software has been designed to be flexible enough
+to be used for a variety of applications and data types. Part of what
+makes \textit{Segmentflow} flexible is the ability to tune the segmentation
+process and the format of the resulting outputs.
+
+\textit{Segmentflow} was designed
+to extract the geometries of granular particles embedded
+in a polymeric matrix for image-based simulations.
+Specifically, the behavior of these particles would be simulated in
+quasi-static, unconfined compression by performing a
+direct numerical simulation (DNS) on the real geometries
+extracted with \textit{Segmentflow}.
+These samples are imaged using x-ray computed tomography (XCT).
+For the granular particles, the goal of the segmentation is to separate
+each particle from the other particles and the polymeric binder,
+then to convert the grayscale intensity voxel data to
+a labeled voxel format and a collection of surface meshes
+(one surface mesh for each particle).
+Each of these output types would be
+used as inputs for a different type of simulation software.
+
+\textit{Segmentflow} ties together the functionality from many powerful
+Python libraries. To improve make interfacing with \textit{Segmentflow}
+more user-friendly, YAML files are used to pass input parameters to
+\textit{Segmentflow} functions using the package \textit{PyYAML} \cite{pyyaml}.
+To load and save images, the package \textit{imageio} \cite{imageio}.
+Image data and manipulations are performed using \textit{NumPy} arrays
+\cite{numpy}. Viewing images and plotting data and information about these
+images is accomplished with \textit{Matplotlib} \cite{matplotlib}.
+Many useful image processing algorithms implemented in
+\textit{scikit-image} are utilized \cite{skimage}. To save surface meshes
+in the STL file format, the package \textit{numpy-stl} is used \cite{numpystl}.
+Finally, image postprocessing methods as well as 3D visualization rely on
+the powerful 3D data processing library \textit{Open3D} \cite{Zhou2018}.
+
+There are two types of segmentation, and the distinction between these types
+is important for \textit{Segmentflow} because many segmentation workflows
+depend on both types.
+The first type of segmentation, semantic segmentation, is the process of
+separating, or segmenting, features in an image by type or class.
+Semantic segmentation on its own can be useful to determine information
+like volume fractions, but often a semantic segmentation is the first step
+for a more involved analysis.
+There are different methods for performing semantic segmentation,
+often by setting a series of threshold values in an image
+and classifying features between those values.
+This can be done manually or procedurally. A common algorithm for
+procedurally determining threshold values is
+known as multi-Otsu thresholding \cite{Otsu1979}.
+The second type of segmentation is instance segmentation.
+In instance segmentation, a region/class of an image,
+is segmented into individual feature
+instances, or segmented particles, of that class.
+Often instance segmentation operates on a binary
+representation of a class previously determined via semantic segmentation.
+These segmented particles will be identified via labeled
+voxels in which each voxel corresponding to a unique particle will be
+labeled with a unique integer.
+
+A common type of instance segmentation
+is watershed segmentation.
+Watershed segmentation can be
+thought of as a simulated flooding process applied to an image
+\cite{Beucher1979,Beucher1992,Soille1990viscomm,Soille1990sigproc,Vincent1991}.
+As a watershed algorithm is applied to an image, the intensities of the
+image act as elevations of a topographic surface. Simulated ``water'' can be
+filled from the lowest elevations first, equal across the full image,
+or the water can be ``poured'' from specifically locations called markers
+\cite{Moga1998,Parvati2008}. As the water fills the surface,
+separate ``catchment basins'' regions that started filling in different
+places begin to near one another. Any time two catchment basins come into
+contact, a ``dam'' is created. The algorithm finished when the image a has
+been completely filled, or reaches a specified elevation/intensity. The
+resulting dams denote the segmented regions.
+It is common for watershed segmentation to be
+applied to a distance transformation of a binary image, which in the case
+of the Euclidean distance transformation (EDT), assigns a new
+value to each foreground pixel according to the distance to the nearest
+background pixel \cite{Danielsson1980}. This creates an image that is more
+logically akin to an elevation map, as the distance map has a natural
+gradient. The distance transform of a few black spots on a white image
+would appear as a mountainous island, with the peak of the island at the
+farthest point from the shore of the metaphoric white sea. If the distance map
+is inverted, a gradual depression is formed that can be filled by the
+algorithmic flooding using information about the morphology of the
+foreground region in an image to segment the features.
+
